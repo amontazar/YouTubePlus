@@ -126,14 +126,27 @@ function canonicalizeChannelKey(href) {
     } catch {}
 
     // 3) Collect channel anchors (handle / channel / c / user)
+    // Subscriptions cards may use either relative (/@foo) or absolute
+    // (https://www.youtube.com/@foo) links depending on renderer/version.
     try {
-      const links = rootEl?.querySelectorAll?.('a[href^="/channel/"], a[href^="/@"], a[href^="/c/"], a[href^="/user/"]');
+      const links = rootEl?.querySelectorAll?.(
+        [
+          'a[href^="/channel/"]',
+          'a[href^="/@"]',
+          'a[href^="/c/"]',
+          'a[href^="/user/"]',
+          'a[href*="youtube.com/channel/"]',
+          'a[href*="youtube.com/@"]',
+          'a[href*="youtube.com/c/"]',
+          'a[href*="youtube.com/user/"]'
+        ].join(', ')
+      );
       if (links && links.length) {
         for (const a of links) {
           const href = a.getAttribute('href');
           if (!href) continue;
-          // if it's a /channel/UC... link, also convert to canonical channel-id key
-          if (href.startsWith('/channel/')) {
+          // if it's a channel-id link, also convert to canonical channel-id key
+          if (href.includes('/channel/')) {
             const id = extractChannelIdFromText(href);
             const k = keyFromChannelId(id);
             if (k) keys.push(k);
