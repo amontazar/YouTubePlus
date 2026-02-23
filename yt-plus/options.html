@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>YT Subscription Folders — Options</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 18px; color: #111; }
+      h1 { font-size: 18px; margin: 0 0 8px; }
+      .sub { color: #555; margin-bottom: 16px; }
+      .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 12px 0; }
+      .row { display: grid; grid-template-columns: 1fr 140px 90px; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+      .row:last-child { border-bottom: 0; }
+      input[type="text"] { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 10px; }
+      input[type="color"] { width: 100%; height: 36px; border: 1px solid #ccc; border-radius: 10px; background: transparent; padding: 0; }
+      button { padding: 8px 10px; border: 1px solid #ccc; background: #fff; border-radius: 10px; cursor: pointer; }
+      button.primary { border-color: #111; }
+      button.danger { border-color: #ff4e45; color: #c40000; }
+      .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+      textarea { width: 100%; min-height: 140px; padding: 10px; border: 1px solid #ccc; border-radius: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .tiny { font-size: 12px; color: #666; margin-top: 6px; }
+      .ok { color: #0a7; }
+      .err { color: #c00; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>YT Subscription Folders (Local)</h1>
+    <div class="sub">
+      Create folders (with colors). Assign channels on <code>/feed/channels</code> (multi-folder + drag &amp; drop), filter on <code>/feed/subscriptions</code>.
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <h2 style="font-size:14px;margin:0;">Folders</h2>
+        <button id="addFolder" class="primary" type="button">+ Add folder</button>
+      </div>
+      <div id="folderList" style="margin-top:10px;"></div>
+      <div class="tiny">Tip: changes save automatically.</div>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:14px;margin:0 0 10px;">Backup / Restore</h2>
+      <div class="actions">
+        <button id="exportBtn" type="button">Export JSON</button>
+        <button id="importBtn" type="button">Import JSON</button>
+        <button id="resetBtn" class="danger" type="button">Reset all</button>
+        <span id="status" class="tiny"></span>
+      </div>
+      <textarea id="jsonBox" placeholder='Export will appear here. Import expects {"folders":[...],"map":{...},"ui":{...}}'></textarea>
+      <div class="tiny">Export includes folders + channel assignments. Import overwrites existing data.</div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

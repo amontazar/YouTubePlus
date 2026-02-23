@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "YT Subscription Folders (Local)",
+  "version": "0.2.8",
+  "description": "YouTube subscription folders (local) with drag-drop + dark mode (canonical channel key + cross-page save fix)",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "YT Folders",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "css": [
+        "contentStyles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

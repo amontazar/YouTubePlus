@@ -1,0 +1,228 @@
+/* YT Subscription Folders (Local) - injected UI styles */
+
+:root {
+  --ytf-bg: rgba(255,255,255,0.92);
+  --ytf-border: rgba(0,0,0,0.12);
+  --ytf-border-strong: rgba(0,0,0,0.35);
+  --ytf-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  --ytf-link: #065fd4;
+  --ytf-text: #0f0f0f;
+}
+
+html[dark], html[dark="true"], body[dark], ytd-app[dark], ytd-app[dark="true"] {
+  --ytf-bg: rgba(24,24,24,0.92);
+  --ytf-border: rgba(255,255,255,0.18);
+  --ytf-border-strong: rgba(255,255,255,0.42);
+  --ytf-shadow: 0 1px 3px rgba(0,0,0,0.40);
+  --ytf-link: #3ea6ff;
+  --ytf-text: #f1f1f1;
+}
+
+#ytf-folder-bar, #ytf-channel-drop-bar {
+  position: sticky;
+  top: 56px;
+  z-index: 10000;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid var(--ytf-border);
+  background: var(--ytf-bg);
+  backdrop-filter: blur(8px);
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 13px;
+  align-items: center;
+  color: var(--ytf-text);
+}
+
+.ytf-folder-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--ytf-border);
+  background: transparent;
+  color: var(--ytf-text);
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.ytf-folder-btn[aria-pressed="true"] {
+  border-color: var(--ytf-border-strong);
+  box-shadow: var(--ytf-shadow);
+}
+
+.ytf-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #999;
+  flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.20);
+}
+
+html[dark] .ytf-dot, html[dark="true"] .ytf-dot, ytd-app[dark] .ytf-dot, ytd-app[dark="true"] .ytf-dot {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.22);
+}
+
+.ytf-small { opacity: 0.85; font-size: 12px; color: var(--ytf-text); }
+
+.ytf-link-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  color: var(--ytf-link);
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none;
+}
+.ytf-link-btn:hover { text-decoration: underline; }
+
+/* Compact inline tags to avoid cutting off YouTube's channel description */
+.ytf-assign-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+  flex-wrap: nowrap;
+  max-width: 48%;
+  overflow: hidden;
+}
+
+.ytf-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 11px;
+  border: 1px solid var(--ytf-border);
+  white-space: nowrap;
+  color: var(--ytf-text);
+}
+
+.ytf-pill-tag .ytf-x {
+  border: 0;
+  background: transparent;
+  color: var(--ytf-text);
+  cursor: pointer;
+  opacity: 0.75;
+  padding: 0 0 0 2px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.ytf-pill-tag .ytf-x:hover { opacity: 1; }
+
+.ytf-edit-btn {
+  border: 1px solid var(--ytf-border);
+  background: transparent;
+  color: var(--ytf-text);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ytf-popover {
+  position: relative;
+  display: inline-block;
+}
+
+.ytf-popover-panel {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 220px;
+  max-width: 320px;
+  background: var(--ytf-bg);
+  color: var(--ytf-text);
+  border: 1px solid var(--ytf-border);
+  border-radius: 12px;
+  box-shadow: var(--ytf-shadow);
+  padding: 10px;
+  z-index: 10001;
+}
+
+.ytf-popover-title { font-size: 12px; opacity: 0.9; margin-bottom: 8px; color: var(--ytf-text); }
+
+.ytf-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px;
+  border-radius: 10px;
+  color: var(--ytf-text);
+}
+.ytf-check:hover { background: rgba(0,0,0,0.05); }
+html[dark] .ytf-check:hover, html[dark="true"] .ytf-check:hover, ytd-app[dark] .ytf-check:hover, ytd-app[dark="true"] .ytf-check:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.ytf-check input { transform: translateY(1px); }
+.ytf-check .ytf-dot { width: 9px; height: 9px; }
+
+.ytf-drop-hint { margin-right: 6px; opacity: 0.85; color: var(--ytf-text); }
+
+.ytf-drop-target-hover {
+  outline: 2px dashed var(--ytf-link);
+  outline-offset: 2px;
+}
+
+/* Sidebar injection */
+#ytf-guide-folders, #ytf-mini-guide-folders {
+  padding: 8px 0;
+  border-top: 1px solid var(--ytf-border);
+  margin-top: 8px;
+  color: var(--ytf-text);
+}
+
+#ytf-guide-folders .ytf-guide-title {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 12px;
+  opacity: 0.85;
+  padding: 0 16px 6px 16px;
+  color: var(--ytf-text);
+}
+
+#ytf-guide-folders .ytf-guide-item, #ytf-mini-guide-folders .ytf-guide-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 10px;
+  margin: 0 8px;
+  color: var(--ytf-text);
+}
+
+#ytf-guide-folders .ytf-guide-item:hover, #ytf-mini-guide-folders .ytf-guide-item:hover { background: rgba(0,0,0,0.06); }
+html[dark] #ytf-guide-folders .ytf-guide-item:hover,
+html[dark="true"] #ytf-guide-folders .ytf-guide-item:hover,
+ytd-app[dark] #ytf-guide-folders .ytf-guide-item:hover,
+ytd-app[dark="true"] #ytf-guide-folders .ytf-guide-item:hover,
+html[dark] #ytf-mini-guide-folders .ytf-guide-item:hover,
+html[dark="true"] #ytf-mini-guide-folders .ytf-guide-item:hover,
+ytd-app[dark] #ytf-mini-guide-folders .ytf-guide-item:hover,
+ytd-app[dark="true"] #ytf-mini-guide-folders .ytf-guide-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* Mini guide: tighter spacing */
+#ytf-mini-guide-folders .ytf-guide-item {
+  padding: 6px 10px;
+  margin: 0 6px;
+}
+#ytf-mini-guide-folders .ytf-guide-item span { font-size: 12px; }
+
+/* Safety: ensure our UI doesn't collapse/clamp channel description */
+ytd-channel-renderer #description,
+ytd-grid-channel-renderer #description {
+  max-height: none !important;
+}
